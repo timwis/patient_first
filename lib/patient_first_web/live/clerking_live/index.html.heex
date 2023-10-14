@@ -7,6 +7,7 @@
   row_click={fn response -> JS.navigate(~p"/clerking/#{response["response_id"]}") end}
 >
   <:col :let={response} label="Submitted at"><.datetime value={response["submitted_at"]} /></:col>
-  <:col :let={response} label="Full name"><%= response["answers"][@questions.full_name]["text"] %></:col>
-  <:col :let={response} label="Date of birth"><%= response["answers"][@questions.date_of_birth]["text"] %></:col>
+  <:col :let={response} label="First name"><%= response["answers"][@questions.first_name]["text"] %></:col>
+  <:col :let={response} label="Last name"><%= response["answers"][@questions.last_name]["text"] %></:col>
+  <:col :let={response} label="Date of birth"><.date value={response["answers"][@questions.date_of_birth]["date"]} /></:col>
 </.table>

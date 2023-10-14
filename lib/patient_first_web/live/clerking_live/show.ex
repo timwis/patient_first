@@ -16,7 +16,7 @@ defmodule PatientFirstWeb.ClerkingLive.Show do
   def apply_action(socket, :show, %{"id" => id}) do
     socket
     |> assign(:page_title, "Showing Clerking response")
-    |> assign(:questions, Responses.questions())
+    |> assign(:questions, Responses.forms_config(:clerking).questions)
     |> assign(:response, Responses.get_clerking_response(id))
   end
 end
