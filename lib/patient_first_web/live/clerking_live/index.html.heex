@@ -4,6 +4,7 @@
 
 <.table id="responses"
   rows={@responses}
+  row_click={fn response -> JS.navigate(~p"/clerking/#{response["response_id"]}") end}
 >
   <:col :let={response} label="Submitted at"><.datetime value={response["submitted_at"]} /></:col>
   <:col :let={response} label="Full name"><%= response["answers"][@questions.full_name]["text"] %></:col>

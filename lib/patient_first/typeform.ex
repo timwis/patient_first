@@ -13,6 +13,10 @@ defmodule Typeform do
     get("/forms/#{form_id}/responses")
   end
 
+  def response(form_id, response_id) do
+    get("/forms/#{form_id}/responses", query: [included_response_ids: response_id])
+  end
+
   def config() do
     Application.fetch_env!(:patient_first, Typeform)
     |> Enum.into(%{})

@@ -19,9 +19,31 @@ defmodule PatientFirst.Responses do
     end
   end
 
+  def get_clerking_response(id) do
+    clerking_form_id = form_ids().clerking
+
+    with {:ok, http_response} <- Typeform.response(clerking_form_id, id),
+         %Tesla.Env{status: 200, body: http_response_body} <- http_response,
+         %{"items" => responses} = http_response_body do
+      responses
+      |> hd()
+      |> Map.update!("answers", fn answers ->
+        Enum.reduce(answers, %{}, fn answer, accum ->
+          Map.put(accum, answer["field"]["ref"], answer)
+        end)
+      end)
+    end
+  end
+
   defp form_ids() do
     Application.fetch_env!(:patient_first, Typeform)
     |> Keyword.get(:form_ids)
+    |> Enum.into(%{})
+  end
+
+  def questions() do
+    Application.fetch_env!(:patient_first, Typeform)
+    |> Keyword.get(:questions)
     |> Enum.into(%{})
   end
 end

@@ -25,6 +25,10 @@ config :patient_first, Typeform,
   personal_access_token: System.get_env("TYPEFORM_ACCESS_TOKEN"),
   form_ids: [
     clerking: System.get_env("CLERKING_FORM_ID")
+  ],
+  questions: [
+    full_name: "0d775592-82ea-48e7-8f62-a9e56bb02e23",
+    date_of_birth: "6e842e90-d8b5-471d-b996-1cd0fd14715b"
   ]
 
 if config_env() == :prod do

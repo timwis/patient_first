@@ -1,0 +1,11 @@
+<.header>
+  Clerking response
+</.header>
+
+<.list>
+  <:item title="Submitted at"><.datetime value={@response["submitted_at"]} /></:item>
+  <:item title="Full name"><%= @response["answers"][@questions.full_name]["text"] %></:item>
+  <:item title="Date of birth"><%= @response["answers"][@questions.date_of_birth]["text"] %></:item>
+</.list>
+
+<.back navigate={~p"/clerking"}>Back to all responses</.back>

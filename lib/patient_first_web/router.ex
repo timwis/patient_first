@@ -68,6 +68,9 @@ defmodule PatientFirstWeb.Router do
       on_mount: [{PatientFirstWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/clerking", ClerkingLive.Index, :index
+      live "/clerking/:id", ClerkingLive.Show, :show
     end
   end
 
