@@ -85,6 +85,7 @@ defmodule PatientFirstWeb do
       import Phoenix.HTML
       # Core UI components and translation
       import PatientFirstWeb.CoreComponents
+      import PatientFirstWeb.FieldComponents
       import PatientFirstWeb.Gettext
 
       # Shortcut for generating JS commands

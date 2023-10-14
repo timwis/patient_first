@@ -20,6 +20,13 @@ if System.get_env("PHX_SERVER") do
   config :patient_first, PatientFirstWeb.Endpoint, server: true
 end
 
+config :patient_first, Typeform,
+  base_url: "https://api.typeform.com/",
+  personal_access_token: System.get_env("TYPEFORM_ACCESS_TOKEN"),
+  form_ids: [
+    clerking: System.get_env("CLERKING_FORM_ID")
+  ]
+
 if config_env() == :prod do
   database_url =
     System.get_env("DATABASE_URL") ||

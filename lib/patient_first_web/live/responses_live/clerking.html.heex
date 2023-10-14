@@ -1,0 +1,11 @@
+<.header>
+  Clerking responses
+</.header>
+
+<.table id="responses"
+  rows={@responses}
+>
+  <:col :let={response} label="Submitted at"><.datetime value={response["submitted_at"]} /></:col>
+  <:col :let={response} label="Full name"><%= response["answers"][@questions.full_name]["text"] %></:col>
+  <:col :let={response} label="Date of birth"><%= response["answers"][@questions.date_of_birth]["text"] %></:col>
+</.table>
