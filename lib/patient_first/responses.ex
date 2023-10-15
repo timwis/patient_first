@@ -3,41 +3,41 @@ defmodule PatientFirst.Responses do
   The Responses context.
   """
 
-  def get_clerking_responses() do
-    clerking_form_id = forms_config(:clerking).id
+  def get_responses(form_key) do
+    form = config(form_key)
+    questions_by_id = invert(form.questions)
 
-    with {:ok, http_response} <- Typeform.responses(clerking_form_id),
+    with {:ok, http_response} <- Typeform.responses(form.id),
          %Tesla.Env{status: 200, body: http_response_body} <- http_response,
          %{"items" => responses} = http_response_body do
       Enum.map(responses, fn response ->
-        Map.update!(response, "answers", fn answers ->
-          Enum.reduce(answers, %{}, fn answer, accum ->
-            Map.put(accum, answer["field"]["ref"], answer)
-          end)
-        end)
+        %{
+          response_id: response["response_id"],
+          submitted_at: response["submitted_at"],
+          answers:
+            Enum.reduce(response["answers"], %{}, fn answer, accum ->
+              key = Map.get(questions_by_id, answer["field"]["id"], answer["field"]["id"])
+              Map.put(accum, key, answer)
+            end)
+        }
       end)
     end
   end
 
-  def get_clerking_response(id) do
-    clerking_form_id = forms_config(:clerking).id
-
-    with {:ok, http_response} <- Typeform.response(clerking_form_id, id),
-         %Tesla.Env{status: 200, body: http_response_body} <- http_response,
-         %{"items" => responses} = http_response_body do
-      responses
-      |> hd()
-      |> Map.update!("answers", fn answers ->
-        Enum.reduce(answers, %{}, fn answer, accum ->
-          Map.put(accum, answer["field"]["ref"], answer)
-        end)
-      end)
-    end
+  defp invert(map) do
+    Enum.reduce(map, %{}, fn {key, value}, accum ->
+      Map.put(accum, value, key)
+    end)
   end
 
-  def forms_config(form) do
+  def get_response(form_key, response_id) do
+    get_responses(form_key)
+    |> Enum.find(fn response -> response.response_id == response_id end)
+  end
+
+  def config(form_key) do
     Application.fetch_env!(:patient_first, Forms)
-    |> Keyword.get(form)
+    |> Keyword.get(form_key)
     |> Enum.into(%{})
     |> Map.update!(:questions, &Enum.into(&1, %{}))
   end

@@ -4,10 +4,10 @@
 
 <.table id="responses"
   rows={@responses}
-  row_click={fn response -> JS.navigate(~p"/clerking/#{response["response_id"]}") end}
+  row_click={fn response -> JS.navigate(~p"/clerking/#{response.response_id}") end}
 >
-  <:col :let={response} label="Submitted at"><.datetime value={response["submitted_at"]} /></:col>
-  <:col :let={response} label="First name"><%= response["answers"][@questions.first_name]["text"] %></:col>
-  <:col :let={response} label="Last name"><%= response["answers"][@questions.last_name]["text"] %></:col>
-  <:col :let={response} label="Date of birth"><.date value={response["answers"][@questions.date_of_birth]["date"]} /></:col>
+  <:col :let={response} label="Submitted at"><.datetime value={response.submitted_at} /></:col>
+  <:col :let={response} label="First name"><.answer value={response.answers.first_name} /></:col>
+  <:col :let={response} label="Last name"><.answer value={response.answers.last_name} /></:col>
+  <:col :let={response} label="Date of birth"><.answer value={response.answers.date_of_birth} /></:col>
 </.table>

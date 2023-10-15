@@ -7,22 +7,45 @@ defmodule PatientFirstWeb.FieldComponents do
   attr :value, :string, required: true
 
   def datetime(assigns) do
-    {:ok, value, _} = DateTime.from_iso8601(assigns.value)
-    formatted = Calendar.strftime(value, @datetime_format)
+    {:ok, datetime, _} = DateTime.from_iso8601(assigns.value)
+    assigns = assign(assigns, :formatted_datetime, Calendar.strftime(datetime, @datetime_format))
 
     ~H"""
-    <time datetime={@value}><%= formatted %></time>
+    <time datetime={@formatted_datetime}><%= @formatted_datetime %></time>
     """
   end
 
   attr :value, :string, required: true
 
   def date(assigns) do
-    {:ok, value, _} = DateTime.from_iso8601(assigns.value)
-    formatted = Calendar.strftime(value, @date_format)
+    {:ok, datetime, _} = DateTime.from_iso8601(assigns.value)
+    assigns = assign(assigns, :formatted_date, Calendar.strftime(datetime, @date_format))
 
     ~H"""
-    <time datetime={@value}><%= formatted %></time>
+    <time datetime={@formatted_date}><%= @formatted_date %></time>
+    """
+  end
+
+  """
+  Example:
+    <.answer value={@answers.first_name} />
+  """
+
+  attr :value, :map, required: true
+
+  # def answer(assigns), do: render_answer(assigns.value)
+
+  # def render_answer(%{"type" => "text"} = assigns) do
+  def answer(%{value: %{"type" => "text"}} = assigns) do
+    ~H"""
+    <span><%= @value["text"] %></span>
+    """
+  end
+
+  # def render_answer(%{"type" => "date"} = assigns) do
+  def answer(%{value: %{"type" => "date"}} = assigns) do
+    ~H"""
+    <.date value={@value["date"]} />
     """
   end
 end
