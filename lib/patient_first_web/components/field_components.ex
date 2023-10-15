@@ -49,9 +49,29 @@ defmodule PatientFirstWeb.FieldComponents do
     """
   end
 
+  def answer(%{value: %{"type" => "number"}} = assigns) do
+    ~H"""
+    <span><%= @value["number"] %></span>
+    """
+  end
+
+  def answer(%{value: %{"type" => "choice"}} = assigns) do
+    ~H"""
+    <span><%= @value["choice"]["label"] %></span>
+    """
+  end
+
+  def answer(%{value: %{"type" => "choices"}} = assigns) do
+    ~H"""
+    <ul>
+      <li :for={label <- @value["choices"]["labels"]}><%= label %></li>
+    </ul>
+    """
+  end
+
   def answer(assigns) do
     ~H"""
-    <span>(Unsupported question type)</span>
+    <span>(Unsupported question type: <%= @value["type"] %>)</span>
     """
   end
 
