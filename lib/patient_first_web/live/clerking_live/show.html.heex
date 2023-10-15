@@ -17,6 +17,16 @@
   </:item>
 </.list>
 
+<h2 class="lg font-semibold leading-8 text-zinc-800 mt-8">
+  AI Summary
+</h2>
+
+<div>
+  <div :for={choice <- @summary.choices} class="whitespace-pre-line">
+    <%= choice["message"]["content"] %>
+  </div>
+</div>
+
 <.answer_list title="Presenting complaint"
   questions={@questions}
   answers={@answers}

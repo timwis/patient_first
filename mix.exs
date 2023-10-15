@@ -53,7 +53,9 @@ defmodule PatientFirst.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:tesla, "~> 1.4"},
-      {:hackney, "~> 1.17"}
+      {:hackney, "~> 1.17"},
+      {:openai, "~> 0.5.2"},
+      {:cachex, "~> 3.6"}
     ]
   end
 

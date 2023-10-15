@@ -14,6 +14,7 @@ defmodule PatientFirst.Application do
       {Phoenix.PubSub, name: PatientFirst.PubSub},
       # Start the Finch HTTP client for sending emails
       {Finch, name: PatientFirst.Finch},
+      {Cachex, name: :patient_first},
       # Start a worker by calling: PatientFirst.Worker.start_link(arg)
       # {PatientFirst.Worker, arg},
       # Start to serve requests, typically the last entry
