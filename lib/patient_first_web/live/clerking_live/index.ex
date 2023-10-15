@@ -16,6 +16,7 @@ defmodule PatientFirstWeb.ClerkingLive.Index do
   def apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Clerking responses")
+    |> assign(:questions, Responses.get_questions(:clerking))
     |> assign(:responses, Responses.get_responses(:clerking))
   end
 end

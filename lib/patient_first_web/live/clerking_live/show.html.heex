@@ -3,10 +3,21 @@
 </.header>
 
 <.list>
-  <:item title="Submitted at"><.date value={@response.submitted_at} /></:item>
-  <:item title="First name"><.answer value={@answers.first_name} /></:item>
-  <:item title="Last name"><.answer value={@answers.last_name} /></:item>
-  <:item title="Date of birth"><.answer value={@answers.date_of_birth} /></:item>
+  <:item title="Submitted at">
+    <.date value={@response.submitted_at} />
+  </:item>
+  <:item title="First name">
+    <.answer value={@answers.first_name} />
+  </:item>
+  <:item title="Last name">
+    <.answer value={@answers.last_name} />
+  </:item>
+  <:item title="Date of birth">
+    <.answer value={@answers.date_of_birth} />
+  </:item>
+  <:item title={@questions.family_medical_conditions}>
+    <.answer value={@answers.family_medical_conditions} />
+  </:item>
 </.list>
 
 <.back navigate={~p"/clerking"}>Back to all responses</.back>

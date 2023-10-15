@@ -26,23 +26,21 @@ defmodule PatientFirstWeb.FieldComponents do
     """
   end
 
-  """
-  Example:
-    <.answer value={@answers.first_name} />
-  """
+  @doc """
+  Renders an answer.
 
+  ## Examples
+
+      <.answer value={@answers.first_name} />
+  """
   attr :value, :map, required: true
 
-  # def answer(assigns), do: render_answer(assigns.value)
-
-  # def render_answer(%{"type" => "text"} = assigns) do
   def answer(%{value: %{"type" => "text"}} = assigns) do
     ~H"""
     <span><%= @value["text"] %></span>
     """
   end
 
-  # def render_answer(%{"type" => "date"} = assigns) do
   def answer(%{value: %{"type" => "date"}} = assigns) do
     ~H"""
     <.date value={@value["date"]} />

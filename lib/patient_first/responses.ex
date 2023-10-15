@@ -24,6 +24,20 @@ defmodule PatientFirst.Responses do
     end
   end
 
+  def get_questions(form_key) do
+    form = config(form_key)
+    questions_by_id = invert(form.questions)
+
+    with {:ok, http_response} <- Typeform.form(form.id),
+         %Tesla.Env{status: 200, body: http_response_body} <- http_response,
+         %{"fields" => fields} = http_response_body do
+      Enum.reduce(fields, %{}, fn field, accum ->
+        key = Map.get(questions_by_id, field["id"], field["id"])
+        Map.put(accum, key, field["title"])
+      end)
+    end
+  end
+
   defp invert(map) do
     Enum.reduce(map, %{}, fn {key, value}, accum ->
       Map.put(accum, value, key)
