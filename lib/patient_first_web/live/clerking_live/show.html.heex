@@ -15,9 +15,92 @@
   <:item title="Date of birth">
     <.answer value={@answers.date_of_birth} />
   </:item>
-  <:item title={@questions.family_medical_conditions}>
-    <.answer value={@answers.family_medical_conditions} />
-  </:item>
 </.list>
+
+<.answer_list title="Presenting complaint"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="are_you_in_any_physical_pain" />
+  <:field key="where_is_your_pain" />
+  <:field key="when_did_it_start" />
+  <:field key="what_does_it_feel_like" />
+  <:field key="does_the_pain_go_anywhere" />
+  <:field key="is_the_pain_associated_with_anything" />
+  <:field key="when_does_the_pain_occur" />
+  <:field key="what_makes_the_pain_better_or_worse" />
+  <:field key="how_bad_is_your_pain" />
+  <:field key="what_symptoms_are_you_experiencing" />
+  <:field key="what_has_caused_you_to_attend_the_hospital_today" />
+</.answer_list>
+
+<.answer_list title="History of the presenting complaint"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="how_long_have_the_symptoms_been_affecting_you" />
+  <:field key="what_makes_the_symptoms_better" />
+  <:field key="what_makes_your_symptoms_worse" />
+  <:field key="do_your_symptoms_vary_throughout_the_day" />
+  <:field key="is_it_associated_with_any_other_symptoms" />
+</.answer_list>
+
+<.answer_list title="Past medical history"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="do_you_have_any_medical_conditions" />
+  <:field key="any_recent_admissions_to_hospital" />
+  <:field key="have_you_had_any_previous_surgeries" />
+</.answer_list>
+
+<.answer_list title="Red flag symptoms / Systemic enquiry"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="the_four_general_questions" />
+  <:field key="have_you_experienced_any_of_these_common_symptoms" />
+</.answer_list>
+
+<.answer_list title="Drug history"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="what_medications_have_you_been_prescribed" />
+  <:field key="any_over_the_counter_medications" />
+</.answer_list>
+
+<.answer_list title="Allergies"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="are_you_allergic_to_anything" />
+</.answer_list>
+
+<.answer_list title="Family history"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="family_medical_conditions" />
+</.answer_list>
+
+<.answer_list title="Social history"
+  questions={@questions}
+  answers={@answers}
+>
+  <:field key="have_you_ever_smoked" />
+  <:field key="how_many_cigarettes_do_you_smoke_on_a_typical_day" />
+  <:field key="how_many_cigarettes_did_you_smoke_a_day" />
+  <:field key="how_long_have_you_smoked_for" />
+  <:field key="do_you_drink_alcohol" />
+  <:field key="what_do_you_drink_in_a_typical_week" />
+  <:field key="what_did_you_used_to_drink_in_a_typical_week" />
+  <:field key="any_recreational_drugs" />
+  <:field key="what_recreational_drugs_do_you_consume" />
+  <:field key="any_foreign_travel_recently" />
+  <:field key="what_is_was_your_occupation" />
+  <:field key="who_do_you_live_with" />
+  <:field key="what_kind_of_support_do_you_need_around_the_house" />
+</.answer_list>
 
 <.back navigate={~p"/clerking"}>Back to all responses</.back>
